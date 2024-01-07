@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {useState, useEffect} from 'react';
+import * as C from './App.styles';
+import { Item  } from './types/Item';
+import { Category  } from './types/category';
+import { items} from './data/items';
+import { categories} from './data/categories';
+import { getCurrentMonth, filterListByMonth } from './helpers/dateFilter';
 
-function App() {
+const App = () => {
+
+  const [list, setList] = useState(items);
+  const [filteredList, setfilteredList] = useState<Item[]>([]);
+  const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
+
+  useEffect(() => {
+    setfilteredList(filterListByMonth(list, currentMonth));
+  }, [list, currentMonth]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <C.Container>
+      <C.Header>
+        <C.HeaderText>Sistema Financeiro</C.HeaderText>
+      </C.Header>
+      <C.Body>
+        
+        {}
+      </C.Body>
+    </C.Container>
   );
 }
+
 
 export default App;
